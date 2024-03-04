@@ -1,0 +1,32 @@
+{
+    "spotsDePeche": [
+      {
+        "nom": "Lac Tranquille",
+        "localisation": {
+          "latitude": 45.123456,
+          "longitude": -1.234567
+        },
+        "type": "lac",
+        "poissons": ["truite", "brochet", "perche"]
+      },
+      {
+        "nom": "Rivière Serpentine",
+        "localisation": {
+          "latitude": 47.987654,
+          "longitude": -2.345678
+        },
+        "type": "rivière",
+        "poissons": ["saumon", "anguille", "ablette"]
+      },
+      {
+        "nom": "Étang Serein",
+        "localisation": {
+          "latitude": 48.567890,
+          "longitude": -3.456789
+        },
+        "type": "étang",
+        "poissons": ["carpe", "gardon", "brème"]
+      }
+    ]
+  }
+  

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communauté et Partage</title>
+    <style>
+        /* Style CSS pour la mise en page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        #gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 20px;
+        }
+        .image {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        .image img {
+            width: 100%;
+            height: auto;
+        }
+        .comments {
+            margin-top: 10px;
+        }
+        .comment {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Communauté et Partage</h1>
+        
+        <!-- Formulaire pour ajouter une photo -->
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="photoInput" accept="image/*" required>
+            <button type="submit">Afficher</button>
+        </form>
+        
+        <!-- Galerie d'images partagées -->
+        <div id="gallery"></div>
+    </div>
+
+    <script>
+        // Fonction pour afficher les images téléchargées dans la galerie
+        function displayImage(file) {
+            const gallery = document.getElementById('gallery');
+            const imageContainer = document.createElement('div');
+            imageContainer.classList.add('image');
+            const image = document.createElement('img');
+            image.src = URL.createObjectURL(file);
+            imageContainer.appendChild(image);
+
+            // Ajouter une section de commentaires
+            const commentsSection = document.createElement('div');
+            commentsSection.classList.add('comments');
+            const commentForm = document.createElement('form');
+            commentForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const commentInput = event.target.querySelector('input[type="text"]');
+                const commentText = commentInput.value;
+                if (commentText.trim() !== '') {
+                    const commentElement = document.createElement('div');
+                    commentElement.classList.add('comment');
+                    commentElement.textContent = commentText;
+                    commentsSection.appendChild(commentElement);
+                    commentInput.value = '';
+                }
+            });
+            const commentInput = document.createElement('input');
+            commentInput.type = 'text';
+            commentInput.placeholder = 'Ajouter un commentaire...';
+            const commentButton = document.createElement('button');
+            commentButton.type = 'submit';
+            commentButton.textContent = 'Commenter';
+            commentForm.appendChild(commentInput);
+            commentForm.appendChild(commentButton);
+            commentsSection.appendChild(commentForm);
+            imageContainer.appendChild(commentsSection);
+
+            gallery.appendChild(imageContainer);
+        }
+
+        // Écouter le téléchargement d'une photo
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const fileInput = document.getElementById('photoInput');
+            const files = fileInput.files;
+            if (files.length === 0) {
+                alert('Veuillez sélectionner une photo.');
+                return;
+            }
+            displayImage(files[0]);
+            fileInput.value = ''; // Effacer le champ de sélection de fichier après le téléchargement
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map des Spots de Pêche</title>
+    
+    <!-- Lien vers style CSS de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    
+    <!-- Lien vers mon style CSS (map.css) -->
+    <link rel="stylesheet" href="map.css" />
+    
+    <!-- Style CSS personnalisé pour les marqueurs -->
+    <style>
+        /* Style personnalisé pour les marqueurs */
+        .custom-marker {
+            width: 30px;
+            height: 30px;
+            background-image: url('marker.png');
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    
+<!-- En-tête de la page avec la barre de navigation -->
+<header>
+    <!-- Titre de la page -->
+    <h2 class="recherche">MAP</h2>
+    
+    <!-- Barre de navigation -->
+    <nav class="navigation">
+        <a href="index.html">Accueil</a>
+        <a href="leaflet.php">Map</a>
+        <a href="repertoire.php">Répertoire</a>
+        <a href="rechercheB.php">Recherche</a>
+        <a href="#">Contact et plus..</a>
+        <button class="btnLogin-popup">Connexion</button>
+    </nav>
+</header>
+
+<!-- Conteneur pour la carte Leaflet -->
+<div id="map"></div>
+
+<!-- Chargement de la bibliothèque Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+<!-- Script JavaScript pour initialiser la carte -->
+<script>
+    // Fonction asynchrone pour initialiser la carte
+    async function initCarte() {
+        // Création d'une instance de la carte Leaflet avec vue initiale
+        const map = L.map('map').setView([46.166667, -1.150000], 7);
+
+        // Ajout d'une couche de tuiles OpenStreetMap à la carte (pour que la map s'affiche morceau par morceau)
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Charger les données depuis le fichier JSON
+        const response = await fetch('fish.json');
+        const data = await response.json();
+
+        // Définir une icône personnalisée pour les marqueurs
+        const customIcon = L.icon({
+            iconUrl: 'marker.png',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+
+        // Ajouter des marqueurs avec pop-ups pour chaque spot de pêche
+        data.spotsDePeche.forEach(spot => {
+            const marker = L.marker([spot.localisation.latitude, spot.localisation.longitude], { icon: customIcon })
+                .addTo(map)
+                .bindPopup(`<b>${spot.nom}</b><br>Type: ${spot.type}<br>Poissons: ${spot.poissons.join(', ')}`);
+        });
+    }
+
+    // Exécuter la fonction initCarte lorsque la page est complètement chargée
+    window.onload = initCarte;
+</script>
+
+
+</body>
+</html>
