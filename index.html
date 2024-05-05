@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -7,29 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GOTIT</title>
     <link rel="stylesheet" href="style.css" />
-
-
+    <base href="http://localhost/GOTIT/" />
 </head>
 
+
 <body>
-    <header>
+
+<header>
         <a href="#"><img src="./image/logo.png" alt="Logo" class="logo"></a>
-        <nav class="navigation">
-            <a href="index.html">Accueil</a>
+            <nav class="navigation">
+            <a href="./index.html">Accueil</a>²
             <a href="navigation/map/leaflet.php">Map</a>
-            <a href="navigation/repertoire/repertoire.php">Répertoire</a>
-            <a href="navigation/recherche/rechercheB.php">Recherche</a>
-            <a href="navigation/contact/contact.html">Contact et plus..</a>
+            <a href="./navigation/repertoire/repertoire.php">Répertoire</a>
+            <a href="./navigation/recherche/rechercheB.html">Recherche</a>
             <button class="btnLogin-popup">Connexion</button>
         </nav>
     </header>
-
 
     <div class="wrapper">
         <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span>
         <div class="form-box login">
             <h2>Connexion</h2>
-            <form method="POST" action="authentification/login.php">
+            <form method="POST" action="./authentification/login.php">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="mail"></ion-icon></span>
                     <input type="email" id="Email_utilisateur" name="Email_utilisateur" required>
@@ -48,14 +48,12 @@
                 <div class="login-register">
                     <p>Vous n'avez pas de compte ? <a href="#" class="register-link"> Inscription</a></p>
                 </div>
+            </form>
         </div>
-        </form>
-
-
 
         <div class="form-box register">
             <h2>Inscription</h2>
-            <form method="POST" action="authentification/traitement.php">
+            <form method="POST" action="./authentification/inscription.php">
                 <div class="input-box">
                     <span class="icon"><ion-icon name="person"></ion-icon></span>
                     <input type="text" id="Identifiant" name="Identifiant" required>
@@ -73,20 +71,12 @@
                 </div>
                 <div class="remember-forgot">
                     <label><input type="checkbox">J'accepte les conditions d'utilisation</label>
-
                 </div>
                 <button type="submit" class="btn">S'inscrire</button>
                 <div class="login-register">
                     <p>Vous avez déjà un compte ? <a href="#" class="login-link"> Connexion</a></p>
                 </div>
-        </div>
-    </div>
-    </form>
-    </div>
-    </div>
-
-
-
+            </form>
 
 
     <script src="script/script.js"></script>
@@ -95,67 +85,6 @@
 
    
 
-    <div class="button-container">
-        <!-- Bouton Concept -->     
-        <div class="description">
-            <h3>BIENVENUE !</h3>
-            <p>Tu aimes la pêche ? Tu aimes les challenges ? <br>
-            TU es au bon endroit ! </p>
-        </div>
-        <a href="hors-navig/concept.html">
-            <button>Concept</button>
-        </a>
-
-        <!-- Bouton Inscription -->
-        <a href="authentification/inscription.php">
-            <button>Je rejoins l'aventure!</button>
-        </a>
-    </div>
-
-
-    <style>
-        .button-container {
-            text-align: center;
-            margin-top: 500px;
-            margin-right: 300px;
-        }
-
-        button {
-            background-color: #ffffff;
-            color: rgb(0, 0, 0);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-right: 40px;
-            margin-top: 100px;
-            margin-bottom: 100px;
-            font-size: 18px;
-            padding: 15px 30px;
-        }
-
-        button:hover {
-            background-color: #81addf;
-        }
-
-        .logo {
-            width: 30px;
-            height: auto;
-        }
-        .container {
-            text-align: center; 
-        }
-
-    
-        .description {
-        background-color: white; /* Fond blanc */
-        padding: 20px;
-        border-radius: 10px;
-    }
-
-  
-    </style>
 </body>
 
 </html>

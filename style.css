@@ -31,10 +31,8 @@ header {
 
 }
 
-.logo {
-    font-size: 2em;
-    color: aliceblue;
-    user-select: none;
+img.logo {
+   width: 120px;
 }
 
 .navigation a {

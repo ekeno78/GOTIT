@@ -1,8 +1,8 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "172.16.196.254";
+$username = "eva";
+$password = "eva";
 
 try{
     $bdd = new PDO("mysql:host=$servername; dbname=gotit", $username,$password);

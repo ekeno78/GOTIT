@@ -8,30 +8,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['Password_utilisateur'];
 
     if ($email != "" && $password != "") {
-
         // Vérification de l'authentification dans la base de données
-        $req = $bdd->prepare("SELECT * FROM utilisateurs WHERE Email_utilisateur = ? AND Password_utilisateur = ?");
-        $req->execute([$email, $password]);
+        $req = $bdd->prepare("SELECT * FROM utilisateurs WHERE Email_utilisateur = ?");
+        $req->execute([$email]);
         $utilisateur = $req->fetch(PDO::FETCH_ASSOC);
 
         if ($utilisateur) {
-            // Authentification réussie
+            // Essayez de vérifier le mot de passe crypté en premier
+            if (password_verify($password, $utilisateur['Password_utilisateur']) || $password == $utilisateur['Password_utilisateur']) {
+                // Authentification réussie
+                // Stocker des informations sur l'utilisateur dans la session
+                $_SESSION['utilisateur'] = $utilisateur;
 
-            // Stocker des informations sur l'utilisateur dans la session
-            $_SESSION['utilisateur'] = $utilisateur;
-
-            // Redirection en fonction du rôle de l'utilisateur
-            if ($utilisateur['role'] == 'admin') {
-                // Redirection vers la page d'administration
-                header("Location: ../page_admin.html");
+                // Rediriger tous les utilisateurs vers la même page après connexion
+                header("Location: ../index.html");
                 exit();
             } else {
-                // Redirection vers la page utilisateur standard
-                header("Location: ../index.html");
+                // Authentification échouée, rediriger vers une page de connexion avec un message d'erreur
+                header("Location: login.php?error=auth_failed");
                 exit();
             }
         } else {
-            // Authentification échouée, rediriger vers une page de connexion avec un message d'erreur
+            // Pas d'utilisateur trouvé avec cet email
             header("Location: login.php?error=auth_failed");
             exit();
         }

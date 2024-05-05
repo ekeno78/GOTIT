@@ -1,8 +1,8 @@
 <?php
 // Connexion à la base de données
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "172.16.196.254";
+$username = "eva";
+$password = "eva";
 
 try {
     $bdd = new PDO("mysql:host=$servername;dbname=gotit", $username, $password);
@@ -53,10 +53,9 @@ try {
     <a href="#"><img src="../../image/logo.png" alt="Logo" class="logo"></a>
     <nav class="navigation">
         <a href="../../index.html">Accueil</a>
-        <a href="../../map/leaflet.php">Map</a>
+        <a href="./leaflet.php">Map</a>
         <a href="../repertoire/repertoire.php">Répertoire</a>
-        <a href="../recherche/rechercheB.php">Recherche</a>
-        <a href="../../contact/contact.html">Contact et plus..</a>
+        <a href="../recherche/rechercheB.html">Recherche</a>
         <button class="btnLogin-popup">Connexion</button>
     </nav>
 </header>
